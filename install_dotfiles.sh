@@ -27,7 +27,7 @@ install_oh_my_zsh() {
         echo "Installing Oh My Zsh..."
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         echo "Importing .zshrc config"
-        cat ~/.zshrc.pre-oh-my-zsh >> ~/.zshrc
+        cat "source ~/.zshrc.pre-oh-my-zsh" >> ~/.zshrc
     fi
 }
 
@@ -42,7 +42,7 @@ main() {
     create_symlinks
     install_zsh
     install_oh_my_zsh
-    install_vim_plugins
+#    install_vim_plugins
     
     echo "Dotfiles installation complete!"
     echo "Please restart your shell or run 'source ~/.zshrc' to apply changes."
