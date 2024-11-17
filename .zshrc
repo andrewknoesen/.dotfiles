@@ -159,7 +159,7 @@ alias java-17="export JAVA_HOME=`/usr/libexec/java_home -v 17` ; java -version"
 alias java-11="export JAVA_HOME=`/usr/libexec/java_home -v 11` ; java -version"
 
 # This is for the ping pong api
-eval "$(rbenv init - bash)"
+#eval "$(rbenv init - bash)"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
