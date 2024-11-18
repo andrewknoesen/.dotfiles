@@ -58,4 +58,12 @@ main() {
     install_powerlevel10k
     install_oh_my_zsh_plugins
     create_symlinks
-    c
+    configure_powerlevel10k
+
+    echo "Dotfiles installation complete!"
+    echo "Please restart your shell or run 'source ~/.zshrc' to apply changes."
+    echo "Then run 'p10k configure' to set up Powerlevel10k if it doesn't start automatically."
+}
+
+# Run the main installation process
+main
