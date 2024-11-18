@@ -16,7 +16,7 @@ create_symlinks() {
 install_zsh() {
     if ! command -v zsh &> /dev/null; then
         echo "Installing Zsh..."
-        sudo apt update && sudo apt install -y zsh
+        apt update && apt install -y zsh
     fi
 }
 
@@ -49,13 +49,13 @@ install_additional_tools() {
     echo "Installing additional tools..."
     
     # Install fzf
-    sudo apt install -y fzf
+    apt install -y fzf
     
     # Install fzf-git.sh
     git clone https://github.com/junegunn/fzf-git.sh.git $HOME/fzf-git.sh
     
     # Install thefuck
-    sudo apt install -y thefuck
+    apt install -y thefuck
     
     # Install zoxide
     curl -sS https://webinstall.dev/zoxide | bash
