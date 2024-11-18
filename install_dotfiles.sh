@@ -49,7 +49,8 @@ install_additional_tools() {
     echo "Installing additional tools..."
     
     # Install fzf
-    apt install -y fzf
+    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+     $HOME/.fzf/install
     
     # Install fzf-git.sh
     git clone https://github.com/junegunn/fzf-git.sh.git $HOME/fzf-git.sh
