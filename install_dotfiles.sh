@@ -15,7 +15,7 @@ create_symlinks() {
 install_zsh() {
     if ! command -v zsh &> /dev/null; then
         echo "Installing Zsh..."
-        apt update && apt install -y zsh
+        sudo apt update && sudo apt install -y zsh
     fi
 }
 
@@ -29,25 +29,33 @@ install_oh_my_zsh() {
     fi
 }
 
+# Install Powerlevel10k theme
+install_powerlevel10k() {
+    echo "Installing Powerlevel10k theme..."
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+}
+
 # Install Oh My Zsh plugins
 install_oh_my_zsh_plugins() {
     echo "Installing Oh My Zsh plugins..."
-    # Add your desired plugins here
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     # Add more plugin installations as needed
+}
+
+# Configure Powerlevel10k
+configure_powerlevel10k() {
+    echo "Configuring Powerlevel10k..."
+    # Ensure the theme is set in .zshrc
+    sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' $HOME/.zshrc
+    # You might want to add more Powerlevel10k specific configurations here
 }
 
 # Main installation process
 main() {
     install_zsh
     install_oh_my_zsh
+    install_powerlevel10k
     install_oh_my_zsh_plugins
     create_symlinks
-
-    echo "Dotfiles installation complete!"
-    echo "Please restart your shell or run 'source ~/.zshrc' to apply changes."
-}
-
-# Run the main installation process
-main
+    c
