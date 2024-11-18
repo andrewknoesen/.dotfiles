@@ -56,10 +56,19 @@ install_additional_tools() {
     git clone https://github.com/junegunn/fzf-git.sh.git $HOME/fzf-git.sh
     
     # Install thefuck
-    apt install -y thefuck
+    pip install thefuck
     
     # Install zoxide
     curl -sS https://webinstall.dev/zoxide | bash
+
+    # Install eza
+    apt install -y gpg
+    mkdir -p /etc/apt/keyrings
+    wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | tee /etc/apt/sources.list.d/gierens.list
+    chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+    apt update
+    apt install -y eza
 }
 
 # Configure additional tools
