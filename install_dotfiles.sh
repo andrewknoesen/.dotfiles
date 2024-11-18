@@ -50,7 +50,7 @@ install_additional_tools() {
     
     # Install fzf
     git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-    $HOME/.fzf/install --key-bindings --completion --no-update-rc
+    source $HOME/.fzf/install --all
     
     # Install fzf-git.sh
     git clone https://github.com/junegunn/fzf-git.sh.git $HOME/fzf-git.sh
