@@ -8,6 +8,7 @@ create_symlinks() {
     echo "Creating symlinks..."
     ln -sf $DOTFILES_DIR/.zshrc $HOME/.zshrc
     ln -sf $DOTFILES_DIR/.gitconfig $HOME/.gitconfig
+    ln -sf $DOTFILES_DIR/.p10k.zsh $HOME/.p10k.zsh
     # Add more symlinks as needed
 }
 
@@ -43,19 +44,38 @@ install_oh_my_zsh_plugins() {
     # Add more plugin installations as needed
 }
 
-# Configure Powerlevel10k
-configure_powerlevel10k() {
-    echo "Configuring Powerlevel10k..."
-    # Ensure the theme is set in .zshrc
-    sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' $HOME/.zshrc
-    # You might want to add more Powerlevel10k specific configurations here
-    # Copy the backed-up .p10k.zsh to the home directory
-    cp $DOTFILES_DIR/.p10k.zsh $HOME/.p10k.zsh
+# Install additional tools
+install_additional_tools() {
+    echo "Installing additional tools..."
+    
+    # Install fzf
+    sudo apt install -y fzf
+    
+    # Install fzf-git.sh
+    git clone https://github.com/junegunn/fzf-git.sh.git $HOME/fzf-git.sh
+    
+    # Install thefuck
+    sudo apt install -y thefuck
+    
+    # Install zoxide
+    curl -sS https://webinstall.dev/zoxide | bash
+}
 
-    # Ensure the .zshrc is sourcing .p10k.zsh
-    if ! grep -q "source ~/.p10k.zsh" $HOME/.zshrc; then
-        echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> $HOME/.zshrc
-    fi
+# Configure additional tools
+configure_additional_tools() {
+    echo "Configuring additional tools..."
+    
+    # Configure fzf
+    echo '[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh' >> $HOME/.zshrc
+    
+    # Configure fzf-git.sh
+    echo 'source ~/fzf-git.sh/fzf-git.sh' >> $HOME/.zshrc
+    
+    # Configure thefuck
+    echo 'eval $(thefuck --alias)' >> $HOME/.zshrc
+    
+    # Configure zoxide
+    echo 'eval "$(zoxide init zsh)"' >> $HOME/.zshrc
 }
 
 # Main installation process
@@ -64,8 +84,9 @@ main() {
     install_oh_my_zsh
     install_powerlevel10k
     install_oh_my_zsh_plugins
+    install_additional_tools
     create_symlinks
-    configure_powerlevel10k
+    # configure_additional_tools
 
     echo "Dotfiles installation complete!"
     echo "Please restart your shell or run 'source ~/.zshrc' to apply changes."
