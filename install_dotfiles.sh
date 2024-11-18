@@ -49,6 +49,13 @@ configure_powerlevel10k() {
     # Ensure the theme is set in .zshrc
     sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' $HOME/.zshrc
     # You might want to add more Powerlevel10k specific configurations here
+    # Copy the backed-up .p10k.zsh to the home directory
+    cp $DOTFILES_DIR/.p10k.zsh $HOME/.p10k.zsh
+
+    # Ensure the .zshrc is sourcing .p10k.zsh
+    if ! grep -q "source ~/.p10k.zsh" $HOME/.zshrc; then
+        echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> $HOME/.zshrc
+    fi
 }
 
 # Main installation process
